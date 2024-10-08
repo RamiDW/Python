@@ -31,14 +31,14 @@ class Sparkonto(Bankkonto):  # Vererbung
         print(f"Zinsen hinzugefügt: {zinsen}. Neuer Kontostand ist {self.kontostand_anzeigen()}.")
 
 # Objekte erstellen
-konto1 = Bankkonto("Alice", 1000)
-konto2 = Sparkonto("Bob", 2000, 0.05)
+konto1 = Bankkonto("Rami", 1000)
+konto2 = Sparkonto("Layan", 2000, 0.05)
 
 # Methoden verwenden
 konto1.einzahlen(500)
 konto1.abheben(200)
-print(f"Alices Kontostand: {konto1.kontostand_anzeigen()}")
+print(f"Rami Kontostand: {konto1.kontostand_anzeigen()}")
 
 konto2.zinsen_hinzufuegen()
 konto2.abheben(100)
-print(f"Bobs Kontostand: {konto2.kontostand_anzeigen()}")
+print(f"Layan Kontostand: {konto2.kontostand_anzeigen()}")
