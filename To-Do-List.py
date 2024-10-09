@@ -1,47 +1,47 @@
-def display_menu():
-    print("1. Add task")
-    print("2. View tasks")
-    print("3. Remove task")
-    print("4. Exit")
+def menue_anzeigen():
+    print("1. Aufgabe hinzufügen")
+    print("2. Aufgaben anzeigen")
+    print("3. Aufgabe entfernen")
+    print("4. Beenden")
 
-def add_task(tasks):
-    task = input("Enter task: ")
-    tasks.append(task)
-    print("Task added.")
+def aufgabe_hinzufuegen(aufgaben):
+    aufgabe = input("Aufgabe eingeben: ")
+    aufgaben.append(aufgabe)
+    print("Aufgabe hinzugefügt.")
 
-def view_tasks(tasks):
-    if tasks:
+def aufgaben_anzeigen(aufgaben):
+    if aufgaben:
         print("#################")
-        for i, task in enumerate(tasks, 1):
-            print(f"{i}. {task}")
-        print("#################\n")  # Added line break here
+        for i, aufgabe in enumerate(aufgaben, 1):
+            print(f"{i}. {aufgabe}")
+        print("#################\n")  # Zeilenumbruch hinzugefügt
     else:
-        print("No tasks found.")
+        print("Keine Aufgaben gefunden.")
 
-def remove_task(tasks):
-    view_tasks(tasks)
-    task_num = int(input("Enter task number to remove: "))
-    if 0 < task_num <= len(tasks):
-        removed_task = tasks.pop(task_num - 1)
-        print(f"Removed task: {removed_task}")
+def aufgabe_entfernen(aufgaben):
+    aufgaben_anzeigen(aufgaben)
+    aufgaben_num = int(input("Nummer der zu entfernenden Aufgabe eingeben: "))
+    if 0 < aufgaben_num <= len(aufgaben):
+        entfernte_aufgabe = aufgaben.pop(aufgaben_num - 1)
+        print(f"Aufgabe entfernt: {entfernte_aufgabe}")
     else:
-        print("Invalid task number.")
+        print("Ungültige Aufgabennummer.")
 
-def main():
-    tasks = []
+def hauptprogramm():
+    aufgaben = []
     while True:
-        display_menu()
-        choice = input("Enter choice: ")
-        if choice == "1":
-            add_task(tasks)
-        elif choice == "2":
-            view_tasks(tasks)
-        elif choice == "3":
-            remove_task(tasks)
-        elif choice == "4":
+        menue_anzeigen()
+        wahl = input("Wahl eingeben: ")
+        if wahl == "1":
+            aufgabe_hinzufuegen(aufgaben)
+        elif wahl == "2":
+            aufgaben_anzeigen(aufgaben)
+        elif wahl == "3":
+            aufgabe_entfernen(aufgaben)
+        elif wahl == "4":
             break
         else:
-            print("Invalid choice. Please try again.")
+            print("Ungültige Wahl. Bitte erneut versuchen.")
 
 if __name__ == "__main__":
-    main()
+    hauptprogramm()
