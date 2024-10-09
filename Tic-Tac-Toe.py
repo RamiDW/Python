@@ -1,45 +1,45 @@
-def print_board(board):
-    for row in board:
-        print("|".join(row))
+def spielfeld_anzeigen(spielfeld):
+    for reihe in spielfeld:
+        print("|".join(reihe))
         print("-" * 5)
- 
-def check_winner(board, player):
-    for row in board:
-        if all([cell == player for cell in row]):
+
+def pruefe_gewinner(spielfeld, spieler):
+    for reihe in spielfeld:
+        if all([feld == spieler for feld in reihe]):
             return True
- 
-    for col in range(3):
-        if all([board[row][col] == player for row in range(3)]):
+
+    for spalte in range(3):
+        if all([spielfeld[reihe][spalte] == spieler for reihe in range(3)]):
             return True
- 
-    if all([board[i][i] == player for i in range(3)]) or all([board[i][2 - i] == player for i in range(3)]):
+
+    if all([spielfeld[i][i] == spieler for i in range(3)]) or all([spielfeld[i][2 - i] == spieler for i in range(3)]):
         return True
- 
+
     return False
- 
-def play_game():
-    board = [[" " for _ in range(3)] for _ in range(3)]
-    current_player = "X"
-    moves = 0
- 
-    while moves < 9:
-        print_board(board)
-        row = int(input(f"Player {current_player}, enter the row (0-2): "))
-        col = int(input(f"Player {current_player}, enter the column (0-2): "))
- 
-        if board[row][col] == " ":
-            board[row][col] = current_player
-            moves += 1
- 
-            if check_winner(board, current_player):
-                print_board(board)
-                print(f"Player {current_player} wins!")
+
+def spiel_starten():
+    spielfeld = [[" " for _ in range(3)] for _ in range(3)]
+    aktueller_spieler = "X"
+    zuege = 0
+
+    while zuege < 9:
+        spielfeld_anzeigen(spielfeld)
+        reihe = int(input(f"Spieler {aktueller_spieler}, gib die Reihe ein (0-2): "))
+        spalte = int(input(f"Spieler {aktueller_spieler}, gib die Spalte ein (0-2): "))
+
+        if spielfeld[reihe][spalte] == " ":
+            spielfeld[reihe][spalte] = aktueller_spieler
+            zuege += 1
+
+            if pruefe_gewinner(spielfeld, aktueller_spieler):
+                spielfeld_anzeigen(spielfeld)
+                print(f"Spieler {aktueller_spieler} gewinnt!")
                 return
- 
-            current_player = "O" if current_player == "X" else "X"
+
+            aktueller_spieler = "O" if aktueller_spieler == "X" else "X"
         else:
-            print("Cell is already taken, try again.")
- 
-    print("It's a tie!")
- 
-play_game()
+            print("Feld ist bereits besetzt, versuche es erneut.")
+
+    print("Unentschieden!")
+
+spiel_starten()
