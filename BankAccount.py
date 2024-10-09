@@ -1,44 +1,46 @@
 class Bankkonto:
     def __init__(self, inhaber, kontostand=0):
         self.inhaber = inhaber
-        self.__kontostand = kontostand  # Kapselung: Privates Attribut
+        self.__kontostand = kontostand
 
     def einzahlen(self, betrag):
-        if betrag > 0:
-            self.__kontostand += betrag
-            print(f"{betrag} eingezahlt. Neuer Kontostand ist {self.__kontostand}.")
-        else:
-            print("Einzahlungsbetrag muss positiv sein.")
+        self.__kontostand += betrag
+        print(f"{betrag} eingezahlt. Neuer Kontostand ist {self.__kontostand}.")
 
     def abheben(self, betrag):
-        if 0 < betrag <= self.__kontostand:
+        if betrag <= self.__kontostand:
             self.__kontostand -= betrag
             print(f"{betrag} abgehoben. Neuer Kontostand ist {self.__kontostand}.")
         else:
-            print("Ungültiger Abhebungsbetrag.")
+            print("Nicht genügend Guthaben.")
 
     def kontostand_anzeigen(self):
-        return self.__kontostand
+        print(f"Der Kontostand beträgt: {self.__kontostand}")
 
-class Sparkonto(Bankkonto):  # Vererbung
-    def __init__(self, inhaber, kontostand=0, zinssatz=0.01):
-        super().__init__(inhaber, kontostand)
-        self.zinssatz = zinssatz
+if __name__ == "__main__":
+    inhaber = input("Name des Kontoinhabers: ")
+    konto = Bankkonto(inhaber, float(input("Startkontostand: ")))
 
-    def zinsen_hinzufuegen(self):
-        zinsen = self._Bankkonto__kontostand * self.zinssatz
-        self.einzahlen(zinsen)
-        print(f"Zinsen hinzugefügt: {zinsen}. Neuer Kontostand ist {self.kontostand_anzeigen()}.")
+    while True:
+        print("\nWählen Sie eine Option:")
+        print("1. Einzahlen")
+        print("2. Abheben")
+        print("3. Kontostand anzeigen")
+        print("4. Programm beenden")
 
-# Objekte erstellen
-konto1 = Bankkonto("Rami", 1000)
-konto2 = Sparkonto("Layan", 2000, 0.05)
+        wahl = input("Ihre Wahl: ")
+        
+        if wahl == '1':
+            betrag = float(input("Einzahlungsbetrag: "))
+            konto.einzahlen(betrag)
+        elif wahl == '2':
+            betrag = float(input("Abhebungsbetrag: "))
+            konto.abheben(betrag)
+        elif wahl == '3':
+            konto.kontostand_anzeigen()
+        elif wahl == '4':
+            print("Programm wird beendet.")
+            break
+        else:
+            print("Ungültige Wahl. Bitte erneut versuchen.")
 
-# Methoden verwenden
-konto1.einzahlen(500)
-konto1.abheben(200)
-print(f"Rami Kontostand: {konto1.kontostand_anzeigen()}")
-
-konto2.zinsen_hinzufuegen()
-konto2.abheben(100)
-print(f"Layan Kontostand: {konto2.kontostand_anzeigen()}")
